@@ -43,3 +43,8 @@ output "deskpact_nameservers" {
   value       = aws_route53_zone.deskpact.name_servers
 }
 
+output "clientmate_nameservers" {
+  description = "Paste these 4 NS into Namecheap > Domain > Nameservers > Custom DNS"
+  value       = aws_route53_zone.clientmate.name_servers
+}
+

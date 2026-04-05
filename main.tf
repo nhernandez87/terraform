@@ -199,3 +199,28 @@ resource "aws_route53_record" "overlord" {
   records = [aws_instance.main.public_ip]
 }
 
+
+# ── clientmate.io ─────────────────────────────────────────────────────────────
+resource "aws_route53_zone" "clientmate" {
+  name = "clientmate.io"
+
+  tags = {
+    Project = "clientmate"
+  }
+}
+
+resource "aws_route53_record" "clientmate_apex" {
+  zone_id = aws_route53_zone.clientmate.zone_id
+  name    = "clientmate.io"
+  type    = "A"
+  ttl     = 300
+  records = ["44.213.112.21"]
+}
+
+resource "aws_route53_record" "clientmate_www" {
+  zone_id = aws_route53_zone.clientmate.zone_id
+  name    = "www.clientmate.io"
+  type    = "A"
+  ttl     = 300
+  records = ["44.213.112.21"]
+}
