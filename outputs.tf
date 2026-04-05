@@ -38,3 +38,8 @@ output "overlord_url" {
   value       = "https://${aws_route53_record.overlord.fqdn}"
 }
 
+output "deskpact_nameservers" {
+  description = "Paste these 4 NS into Namecheap > Domain > Nameservers > Custom DNS"
+  value       = aws_route53_zone.deskpact.name_servers
+}
+

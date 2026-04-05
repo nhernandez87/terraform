@@ -165,6 +165,31 @@ resource "aws_route53_record" "server" {
   records = [aws_instance.main.public_ip]
 }
 
+# ── deskpact.com ─────────────────────────────────────────────────────────────
+resource "aws_route53_zone" "deskpact" {
+  name = "deskpact.com"
+
+  tags = {
+    Project = "deskpact"
+  }
+}
+
+resource "aws_route53_record" "deskpact_apex" {
+  zone_id = aws_route53_zone.deskpact.zone_id
+  name    = "deskpact.com"
+  type    = "A"
+  ttl     = 300
+  records = ["44.213.112.21"]
+}
+
+resource "aws_route53_record" "deskpact_www" {
+  zone_id = aws_route53_zone.deskpact.zone_id
+  name    = "www.deskpact.com"
+  type    = "A"
+  ttl     = 300
+  records = ["44.213.112.21"]
+}
+
 # Route 53 DNS Record for Overlord dashboard
 resource "aws_route53_record" "overlord" {
   zone_id = var.route53_zone_id
