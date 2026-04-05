@@ -37,13 +37,13 @@ variable "vpc_cidr" {
 variable "instance_type" {
   description = "EC2 instance type"
   type        = string
-  default     = "t3a.large"
+  default     = "t3a.medium"
 }
 
 variable "disk_size" {
   description = "Size of the root disk in GB"
   type        = number
-  default     = 50
+  default     = 30
 }
 
 variable "ssh_key_name" {

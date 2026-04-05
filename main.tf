@@ -18,7 +18,8 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region  = var.aws_region
+  profile = "naguer"
 }
 
 # Get the latest Amazon Linux 2023 AMI
@@ -108,7 +109,8 @@ resource "aws_security_group" "ec2_sg" {
   }
 
   lifecycle {
-    ignore_changes = [name]
+    # ingress rules are managed dynamically by aws-update-ssh-ip script
+    ignore_changes = [name, ingress]
   }
 
   tags = {
@@ -140,6 +142,12 @@ resource "aws_instance" "main" {
   })
 
   user_data_replace_on_change = true
+
+  lifecycle {
+    # Ignore AMI updates, user_data changes, and root_block_device (encryption
+    # can't be changed without replacing the instance).
+    ignore_changes = [ami, user_data, root_block_device]
+  }
 
   tags = {
     Name        = "${var.project_name}-ec2"
