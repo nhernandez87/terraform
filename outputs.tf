@@ -33,8 +33,8 @@ output "dns_name" {
   value       = aws_route53_record.server.fqdn
 }
 
-output "n8n_dns_name" {
-  description = "DNS name for n8n"
-  value       = aws_route53_record.n8n.fqdn
+output "overlord_url" {
+  description = "URL for the Overlord dashboard"
+  value       = "https://${aws_route53_record.overlord.fqdn}"
 }
 

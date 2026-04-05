@@ -165,10 +165,10 @@ resource "aws_route53_record" "server" {
   records = [aws_instance.main.public_ip]
 }
 
-# Route 53 DNS Record for n8n subdomain
-resource "aws_route53_record" "n8n" {
+# Route 53 DNS Record for Overlord dashboard
+resource "aws_route53_record" "overlord" {
   zone_id = var.route53_zone_id
-  name    = "n8n.${var.domain_name}"
+  name    = "overlord.${var.domain_name}"
   type    = "A"
   ttl     = 300
   records = [aws_instance.main.public_ip]
